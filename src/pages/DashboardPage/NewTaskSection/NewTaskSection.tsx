@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
+import { localStorageWorker } from "../../../common/commonFunctions";
+
 function NewTaskSection() {
   const [newTaskName, setNewTaskName] = useState("");
 
   const handleTaskAdd = () => {
-    console.log(newTaskName);
-    console.log(window.localStorage);
+    localStorageWorker.saveTask(newTaskName);
   };
 
   return (
