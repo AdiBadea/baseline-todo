@@ -1,11 +1,14 @@
+import { useEffect } from "react";
 import "./styles.css";
 
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 
 export default function App() {
+  useEffect(() => {
+    console.log(window.localStorage);
+  }, []);
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
+    <div>
       <DashboardPage />
     </div>
   );
