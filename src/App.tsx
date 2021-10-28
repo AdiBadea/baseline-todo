@@ -6,9 +6,9 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import { localStorageWorker } from "./common/commonFunctions";
 
 export default function App() {
-  useEffect(() => {
+  useEffect((): void => {
+    console.log("APP MOUNT");
     localStorageWorker.initialize();
-    console.log(window.localStorage);
   }, []);
   return (
     <div>
