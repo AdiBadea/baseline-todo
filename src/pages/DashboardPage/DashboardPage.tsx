@@ -5,7 +5,7 @@ import TaskListSection from "./TaskListSection/TaskListSection";
 
 function DashboardPage() {
   return (
-    <div>
+    <div className="DashboardPage">
       <NewTaskSection />
       <TaskListSection />
     </div>

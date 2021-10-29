@@ -26,15 +26,20 @@ function TaskListItem({ name, isDone }) {
 function NewTaskSection() {
   const [taskList, setTaskList] = useState([]);
 
+  // Initialize the component
   useEffect((): void => {
-    const tasksFromLocalStorage = localStorageWorker.getTaskList();
+    async function initializeComponent() {
+      const tasksFromLocalStorage = localStorageWorker.getTaskList();
+      setTaskList(tasksFromLocalStorage);
+    }
     // window.addEventListener("storage", () => {
-    //   // When local storage changes, dump the list to
-    //   // the console.
-    //   setTaskList(tasksFromLocalStorage);
     // });
-    setTaskList(tasksFromLocalStorage);
+    initializeComponent();
   }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("taskList", taskList);
+  // }, [taskList]);
 
   return (
     <section>

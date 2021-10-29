@@ -1,0 +1,14 @@
+.DashboardPage {
+  display: flex;
+  justify-content: center;
+  
+  .new-task-section {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+
+    &-submit-button {
+      margin-left: 10px;
+    }
+  }
+}
