@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useContext } from "react";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import { localStorageWorker } from "../../../common/commonFunctions";
 
+import { TaskListContext } from "../../../context/TaskListContext";
+import TasklistReducer from "../../../context/TaskListReducer";
+import { addTaskAction } from "../../../context/Actions";
+
 /* Stylesheet */
 import "../DashboardPage.scss";
 
 function NewTaskSection() {
   const [newTaskName, setNewTaskName] = useState("");
+  const taskList = useContext(TaskListContext);
+  const [state, dispatch] = useReducer(TasklistReducer, taskList);
+
+  // dispatch({type: 'decrement'})}
+  // ADD_TASK
 
   const handleTaskAdd = () => {
+    dispatch(addTaskAction());
     localStorageWorker.saveTask(newTaskName);
     setNewTaskName("");
   };
