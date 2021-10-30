@@ -21,8 +21,8 @@ function NewTaskSection() {
   // ADD_TASK
 
   const handleTaskAdd = () => {
-    dispatch(addTaskAction());
-    localStorageWorker.saveTask(newTaskName);
+    dispatch(addTaskAction(newTaskName));
+    // localStorageWorker.saveTask(newTaskName);
     setNewTaskName("");
   };
 
