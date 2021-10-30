@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,6 +9,8 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 import { localStorageWorker } from "../../../common/commonFunctions";
+
+import { TaskListContext } from "../../../context/TaskListContext";
 
 function TaskListItem({ name, isDone }) {
   return (
@@ -24,22 +26,7 @@ function TaskListItem({ name, isDone }) {
 }
 
 function NewTaskSection() {
-  const [taskList, setTaskList] = useState([]);
-
-  // Initialize the component
-  useEffect((): void => {
-    async function initializeComponent() {
-      const tasksFromLocalStorage = localStorageWorker.getTaskList();
-      setTaskList(tasksFromLocalStorage);
-    }
-    // window.addEventListener("storage", () => {
-    // });
-    initializeComponent();
-  }, []);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("taskList", taskList);
-  // }, [taskList]);
+  const taskList = useContext(TaskListContext);
 
   return (
     <section>
