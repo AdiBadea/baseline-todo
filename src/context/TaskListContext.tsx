@@ -1,10 +1,16 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
-const mockTaskList = [{ id: 1, name: "test context", isDone: false }];
-export const TaskListContext = createContext(mockTaskList);
+import { localStorageWorker } from "../common/commonFunctions";
+
+const tasksFromLocalStorage = localStorageWorker.getTaskList();
+export const TaskListContext = createContext(tasksFromLocalStorage);
 
 function TaskListContextProvider({ children }) {
   const [taskList, setTaskList] = useState([]);
+
+  useEffect(() => {
+    console.log("CONTEXT LOADED");
+  }, []);
 
   return (
     <TaskListContext.Provider value={taskList}>
