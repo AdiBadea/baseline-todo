@@ -14,7 +14,7 @@ import "../DashboardPage.scss";
 
 function NewTaskSection() {
   const [newTaskName, setNewTaskName] = useState("");
-  const taskList = useContext(TaskListContext);
+  const { taskList } = useContext(TaskListContext);
   const [state, dispatch] = useReducer(TasklistReducer, taskList);
 
   // dispatch({type: 'decrement'})}

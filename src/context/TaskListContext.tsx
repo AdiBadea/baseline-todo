@@ -14,7 +14,7 @@ function TaskListContextProvider({ children }) {
 
   return (
     // TODO - Add { taskList, setTaskList }
-    <TaskListContext.Provider value={taskList}>
+    <TaskListContext.Provider value={{ taskList, setTaskList }}>
       {children}
     </TaskListContext.Provider>
   );
