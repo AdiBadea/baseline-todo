@@ -25,8 +25,9 @@ function TaskListItem({ name, isDone }) {
 }
 
 function NewTaskSection() {
-  const { globalState } = TaskListStore();
-  const { taskList } = globalState;
+  console.log(TaskListStore());
+  const { taskListStore } = TaskListStore();
+  const { taskList } = taskListStore;
 
   return (
     <section>

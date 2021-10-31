@@ -9,10 +9,10 @@ const TaskListContext = createContext(taskListStoreInitialState);
 export const TaskListStore = () => useContext(TaskListContext);
 
 export function TaskListStoreProvider({ children, initialState, reducer }) {
-  const [globalState, dispatch] = useReducer(reducer, initialState);
+  const [taskListStore, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <TaskListContext.Provider value={{ globalState, dispatch }}>
+    <TaskListContext.Provider value={{ taskListStore, dispatch }}>
       {children}
     </TaskListContext.Provider>
   );
