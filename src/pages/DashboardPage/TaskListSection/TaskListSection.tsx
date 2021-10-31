@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-import useStore from "../../../context/TaskListContext";
+import TaskListStore from "../../../context/TaskListContext";
 
 function TaskListItem({ name, isDone }) {
   return (
@@ -25,7 +25,7 @@ function TaskListItem({ name, isDone }) {
 
 function NewTaskSection() {
   // const taskList = useContext(TaskListContext);
-  const { globalState } = useStore();
+  const { globalState } = TaskListStore();
   const { taskList } = globalState;
   // const [globalState] = useStore();
   // const { taskList } = globalState;
