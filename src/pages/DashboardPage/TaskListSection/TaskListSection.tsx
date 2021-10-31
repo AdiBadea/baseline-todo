@@ -30,7 +30,7 @@ function NewTaskSection() {
   const { taskList } = taskListStore;
 
   return (
-    <section>
+    <section className="task-list-section">
       <List>
         {taskList.map((task, index) => {
           console.log(task);

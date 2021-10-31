@@ -1,14 +1,23 @@
 .DashboardPage {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   
   .new-task-section {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    width: 100%;
     margin-top: 20px;
 
     &-submit-button {
       margin-left: 10px;
     }
+  }
+
+  .task-list-section {
+    margin: 10px;
+    max-width: 80%;
+    overflow: hidden;
   }
 }

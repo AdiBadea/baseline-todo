@@ -19,7 +19,7 @@ function NewTaskSection() {
   };
 
   return (
-    <div className="new-task-section">
+    <section className="new-task-section">
       <TextField
         label="Task name"
         value={newTaskName}
@@ -32,7 +32,7 @@ function NewTaskSection() {
       >
         Add
       </Button>
-    </div>
+    </section>
   );
 }
 
