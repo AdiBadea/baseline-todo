@@ -9,13 +9,16 @@ import { TaskListContext } from "../../../context/TaskListContext";
 import TasklistReducer from "../../../context/TaskListReducer";
 import { addTaskAction } from "../../../context/Actions";
 
+import { useStore } from "../../../context/TaskListContext";
+
 /* Stylesheet */
 import "../DashboardPage.scss";
 
 function NewTaskSection() {
   const [newTaskName, setNewTaskName] = useState("");
-  const { taskList } = useContext(TaskListContext);
-  const [state, dispatch] = useReducer(TasklistReducer, taskList);
+  const { dispatch } = useStore();
+  // const { taskList } = useContext(TaskListContext);
+  // const [state, dispatch] = useReducer(TasklistReducer, taskList);
 
   // dispatch({type: 'decrement'})}
   // ADD_TASK
