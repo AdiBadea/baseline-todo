@@ -14,11 +14,11 @@ const mockTasks = [
   }
 ];
 
-export const initialState = {
+export const taskListStoreInitialState = {
   taskList: [...mockTasks]
 };
 
-function TasklistReducer(state = initialState, action) {
+function TasklistReducer(state = taskListStoreInitialState, action) {
   switch (action.type) {
     case ADD_TASK:
       const newTask: any = {

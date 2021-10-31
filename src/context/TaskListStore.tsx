@@ -1,8 +1,10 @@
-/* Core */
+/** Core */
 import { createContext, useReducer, useContext } from "react";
+/** Context */
+import { taskListStoreInitialState } from "./TaskListReducer";
 
-export const TaskListContext = createContext([]);
-TaskListContext.displayName = "TaskListContext";
+const TaskListContext = createContext(taskListStoreInitialState);
+// TaskListContext.displayName = "TaskListContext"; // TODO - See what this does
 
 export const TaskListStore = () => useContext(TaskListContext);
 

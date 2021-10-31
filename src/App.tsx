@@ -6,7 +6,9 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import { localStorageWorker } from "./common/commonFunctions";
 
 import { TaskListStoreProvider } from "./context/TaskListStore";
-import TasklistReducer, { initialState } from "./context/TaskListReducer";
+import TasklistReducer, {
+  taskListStoreInitialState
+} from "./context/TaskListReducer";
 
 export default function App() {
   useEffect((): void => {
@@ -16,7 +18,7 @@ export default function App() {
   return (
     <div>
       <TaskListStoreProvider
-        initialState={initialState}
+        initialState={taskListStoreInitialState}
         reducer={TasklistReducer}
       >
         <DashboardPage />
