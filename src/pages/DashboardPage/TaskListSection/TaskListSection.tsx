@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-
+/** Core */
+import React from "react";
+/** MUI */
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -7,8 +8,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-
-import TaskListStore from "../../../context/TaskListContext";
+/** Context */
+import TaskListStore from "../../../context/TaskListStore";
 
 function TaskListItem({ name, isDone }) {
   return (
@@ -24,11 +25,8 @@ function TaskListItem({ name, isDone }) {
 }
 
 function NewTaskSection() {
-  // const taskList = useContext(TaskListContext);
   const { globalState } = TaskListStore();
   const { taskList } = globalState;
-  // const [globalState] = useStore();
-  // const { taskList } = globalState;
 
   return (
     <section>
