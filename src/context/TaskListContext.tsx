@@ -1,16 +1,5 @@
-import {
-  createContext,
-  useState,
-  useEffect,
-  useReducer,
-  useContext
-} from "react";
-
-// import { localStorageWorker } from "../common/commonFunctions";
-
-import TaskListReducer from "./TaskListReducer";
-
-// const tasksFromLocalStorage = localStorageWorker.getTaskList();
+/* Core */
+import { createContext, useReducer, useContext } from "react";
 
 export const TaskListContext = createContext([]);
 TaskListContext.displayName = "TaskListContext";
