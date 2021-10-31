@@ -1,7 +1,11 @@
+/** Context */
 import { ADD_TASK } from "./ActionTypes";
+/** Interfaces */
+import { Task, TaskListReducerActions } from "../common/commonInterfaces";
+/** Utility */
 import { v4 as uuidv4 } from "uuid";
 
-const mockTasks = [
+const mockTasks: Task[] = [
   {
     id: 1,
     name: "mock 1",
@@ -18,16 +22,18 @@ export const taskListStoreInitialState = {
   taskList: [...mockTasks]
 };
 
-function TasklistReducer(state = taskListStoreInitialState, action) {
+function TasklistReducer(
+  state = taskListStoreInitialState,
+  action: TaskListReducerActions
+) {
   switch (action.type) {
     case ADD_TASK:
+      console.log(action);
       const newTask: any = {
         id: uuidv4(),
         name: action.payload,
         isDone: false
       };
-      console.log("= NEW TASK CREATED =");
-      console.log(state);
       return {
         ...state,
         taskList: state.taskList.concat(newTask)
