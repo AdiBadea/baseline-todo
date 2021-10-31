@@ -1,20 +1,14 @@
-import { useEffect } from "react";
-import "./styles.css";
-
+/** Components */
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
-
-import { localStorageWorker } from "./common/commonFunctions";
-
+/** Context */
 import { TaskListStoreProvider } from "./context/TaskListStore";
 import TasklistReducer, {
   taskListStoreInitialState
 } from "./context/TaskListReducer";
+/** Stylesheet */
+import "./styles.css";
 
 export default function App() {
-  useEffect((): void => {
-    console.log("APP MOUNT");
-    localStorageWorker.initialize();
-  }, []);
   return (
     <div>
       <TaskListStoreProvider

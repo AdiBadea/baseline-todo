@@ -1,10 +1,14 @@
-export interface Task {
+export interface ITask {
   id: number;
   name: string;
   isDone: boolean;
 }
 
-export interface TaskListReducerActions {
+export interface ITaskListStore {
+  taskList: Array<ITask>;
+}
+
+export interface ITaskListReducerActions {
   type: string;
-  payload: unknown;
+  payload: string | null;
 }
