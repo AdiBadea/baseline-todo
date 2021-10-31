@@ -26,36 +26,15 @@ function TasklistReducer(state = initialState, action) {
         name: action.payload,
         isDone: false
       };
+      console.log("= NEW TASK CREATED =");
       console.log(state);
-      // state.push(newTask);
       return {
         ...state,
         taskList: state.taskList.concat(newTask)
       };
-    // return state;
     default:
       throw new Error();
   }
 }
 
 export default TasklistReducer;
-
-// export const ADD_BOOKING = "APP/BOOK_TABLE/ADD_BOOKING";
-
-// export const initialState = {
-//   bookings: []
-// };
-
-// export const addBooking = (booking) => ({
-//   type: ADD_BOOKING,
-//   booking
-// });
-
-// export const bookTableReducer = (state = initialState, action) => {
-//   if (action.type === ADD_BOOKING) {
-//     return {
-//       ...state,
-//       bookings: state.bookings.concat(action.booking)
-//     };
-//   }
-// };
