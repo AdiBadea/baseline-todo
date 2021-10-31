@@ -5,7 +5,7 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 
 import { localStorageWorker } from "./common/commonFunctions";
 
-import TaskListStoreProvider from "./context/TaskListContext";
+import { TaskListStoreProvider } from "./context/TaskListContext";
 import TasklistReducer, { initialState } from "./context/TaskListReducer";
 
 export default function App() {

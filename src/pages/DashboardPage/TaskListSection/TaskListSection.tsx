@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-import { useStore } from "../../../context/TaskListContext";
+import useStore from "../../../context/TaskListContext";
 
 function TaskListItem({ name, isDone }) {
   return (

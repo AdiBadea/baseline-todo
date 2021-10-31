@@ -17,7 +17,7 @@ TaskListContext.displayName = "TaskListContext";
 
 export const useStore = () => useContext(TaskListContext);
 
-function TaskListStoreProvider({ children, initialState, reducer }) {
+export function TaskListStoreProvider({ children, initialState, reducer }) {
   const [globalState, dispatch] = useReducer(reducer, initialState);
 
   return (
@@ -27,7 +27,7 @@ function TaskListStoreProvider({ children, initialState, reducer }) {
   );
 }
 
-export default TaskListStoreProvider;
+export default useStore;
 
 // import React from "react";
 
