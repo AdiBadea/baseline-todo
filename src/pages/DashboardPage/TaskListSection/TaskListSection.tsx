@@ -8,11 +8,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import Divider from "@mui/material/Divider";
 /** Context */
 import TaskListStore from "../../../context/TaskListStore";
 import { toggleTaskStatusAction } from "../../../context/Actions";
 /** Interfaces */
 import { ITask } from "../../../common/commonInterfaces";
+/** Constants */
+import { TASK_TYPES } from "../../../common/constants";
 
 interface ITaskListItemProps {
   name: string;
@@ -39,28 +42,55 @@ function TaskListItem({ name, isDone, taskId }: ITaskListItemProps) {
   );
 }
 
-function NewTaskSection() {
+function TaskListSection() {
   const { taskListStore } = TaskListStore();
   const { taskList } = taskListStore;
+
+  const buildTaskList = (taskType: string): void => {
+    // TODO - Simplify this
+    switch (taskType) {
+      case TASK_TYPES.PENDING_TASKS:
+        return taskList.map(
+          (task: ITask): ReactElement => {
+            if (!task.isDone) {
+              return (
+                <TaskListItem
+                  name={task.name}
+                  isDone={task.isDone}
+                  key={task.id}
+                  taskId={task.id}
+                />
+              );
+            }
+          }
+        );
+      case TASK_TYPES.COMPLETED_TASKS:
+        return taskList.map(
+          (task: ITask): ReactElement => {
+            if (task.isDone) {
+              return (
+                <TaskListItem
+                  name={task.name}
+                  isDone={task.isDone}
+                  key={task.id}
+                  taskId={task.id}
+                />
+              );
+            }
+          }
+        );
+    }
+  };
 
   return (
     <section className="task-list-section">
       <List>
-        {taskList.map(
-          (task: ITask): ReactElement => {
-            return (
-              <TaskListItem
-                name={task.name}
-                isDone={task.isDone}
-                key={task.id}
-                taskId={task.id}
-              />
-            );
-          }
-        )}
+        {buildTaskList(TASK_TYPES.PENDING_TASKS)}
+        <Divider />
+        {buildTaskList(TASK_TYPES.COMPLETED_TASKS)}
       </List>
     </section>
   );
 }
 
-export default NewTaskSection;
+export default TaskListSection;

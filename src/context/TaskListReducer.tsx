@@ -10,22 +10,10 @@ import {
 import { localStorageWorker } from "../common/commonFunctions";
 import { v4 as uuidv4 } from "uuid";
 
-const mockTasks: ITask[] = [
-  {
-    id: "1",
-    name: "Mock task 1",
-    isDone: false
-  },
-  {
-    id: "2",
-    name: "Mock task 2",
-    isDone: false
-  }
-];
-
 const taskListFromLocalStorage: ITask[] = localStorageWorker.getTaskList();
 
 export const taskListStoreInitialState: ITaskListStore = {
+  // Load the tasks saved in localStorage
   taskList: [...taskListFromLocalStorage]
 };
 
