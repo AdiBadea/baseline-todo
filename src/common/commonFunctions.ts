@@ -1,22 +1,30 @@
-export const localStorageWorker = {
+/** Interfaces */
+import { ITask } from "./commonInterfaces";
+/** Constants */
+import { LOCALSTORAGE_TASK_ARRAY_KEY } from "./constants";
+
+interface IlocalStorageWorker {
+  initialize: Function;
+  updateTaskList: Function;
+  getTaskList: Function;
+}
+
+export const localStorageWorker: IlocalStorageWorker = {
   initialize: (): void => {
     if (!window.localStorage.taskList) {
-      console.log("INIT RAN");
-      localStorage.setItem("taskList", "[]");
+      localStorage.setItem(LOCALSTORAGE_TASK_ARRAY_KEY, "[]");
     }
   },
-  // saveTask: (newTask: string): void => {
-  //   const taskList = JSON.parse(localStorage.getItem("taskList") || "[]");
-  //   taskList.push({
-  //     id: uuidv4(), // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-  //     name: newTask,
-  //     isDone: false
-  //   });
-  //   localStorage.setItem("taskList", JSON.stringify(taskList));
-  // },
-  getTaskList: () => {
-    // TODO - Add return type of func
-    const taskList = JSON.parse(localStorage.getItem("taskList") || "[]");
+  updateTaskList: (newTaskList: ITask[]): void => {
+    localStorage.setItem(
+      LOCALSTORAGE_TASK_ARRAY_KEY,
+      JSON.stringify(newTaskList)
+    );
+  },
+  getTaskList: (): ITask[] => {
+    const taskList = JSON.parse(
+      localStorage.getItem(LOCALSTORAGE_TASK_ARRAY_KEY) || "[]"
+    );
     return taskList;
   }
 };

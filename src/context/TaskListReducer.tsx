@@ -7,6 +7,7 @@ import {
   ITaskListStore
 } from "../common/commonInterfaces";
 /** Utility */
+import { localStorageWorker } from "../common/commonFunctions";
 import { v4 as uuidv4 } from "uuid";
 
 const mockTasks: ITask[] = [
@@ -22,8 +23,10 @@ const mockTasks: ITask[] = [
   }
 ];
 
+const taskListFromLocalStorage: ITask[] = localStorageWorker.getTaskList();
+
 export const taskListStoreInitialState: ITaskListStore = {
-  taskList: [...mockTasks]
+  taskList: [...taskListFromLocalStorage]
 };
 
 function TasklistReducer(
@@ -41,6 +44,9 @@ function TasklistReducer(
       };
 
       state.taskList = state.taskList.concat(newTask);
+
+      // Update the tasklist in localStorage also.
+      localStorageWorker.updateTaskList(state.taskList);
       newState = { ...state };
       break;
     case TOGGLE_TASK_STATUS:
@@ -57,6 +63,8 @@ function TasklistReducer(
         }
       });
 
+      // Update the tasklist in localStorage also.
+      localStorageWorker.updateTaskList(state.taskList);
       newState = { ...state };
       break;
     default:
