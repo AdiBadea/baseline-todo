@@ -10,20 +10,28 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 /** Context */
 import TaskListStore from "../../../context/TaskListStore";
+import { toggleTaskStatusAction } from "../../../context/Actions";
 /** Interfaces */
 import { ITask } from "../../../common/commonInterfaces";
 
 interface ITaskListItemProps {
   name: string;
   isDone: boolean;
+  taskId: string;
 }
 
-function TaskListItem({ name, isDone }: ITaskListItemProps) {
+function TaskListItem({ name, isDone, taskId }: ITaskListItemProps) {
+  const { dispatch } = TaskListStore();
+
+  const handleTaskStatusToggle = (taskId: string): void => {
+    dispatch(toggleTaskStatusAction(taskId));
+  };
+
   return (
-    <ListItem disablePadding>
+    <ListItem disablePadding onClick={() => handleTaskStatusToggle(taskId)}>
       <ListItemButton>
         <ListItemIcon>
-          {isDone ? CheckBoxIcon : <CheckBoxOutlineBlankIcon />}
+          {isDone ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
         </ListItemIcon>
         <ListItemText primary={name} />
       </ListItemButton>
@@ -32,7 +40,6 @@ function TaskListItem({ name, isDone }: ITaskListItemProps) {
 }
 
 function NewTaskSection() {
-  console.log(TaskListStore());
   const { taskListStore } = TaskListStore();
   const { taskList } = taskListStore;
 
@@ -40,10 +47,14 @@ function NewTaskSection() {
     <section className="task-list-section">
       <List>
         {taskList.map(
-          (task: ITask, index: number): ReactElement => {
-            console.log(task);
+          (task: ITask): ReactElement => {
             return (
-              <TaskListItem name={task.name} isDone={task.isDone} key={index} />
+              <TaskListItem
+                name={task.name}
+                isDone={task.isDone}
+                key={task.id}
+                taskId={task.id}
+              />
             );
           }
         )}

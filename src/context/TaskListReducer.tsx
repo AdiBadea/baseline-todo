@@ -1,5 +1,5 @@
 /** Context */
-import { ADD_TASK } from "./ActionTypes";
+import { ADD_TASK, TOGGLE_TASK_STATUS } from "./ActionTypes";
 /** Interfaces */
 import {
   ITask,
@@ -11,13 +11,13 @@ import { v4 as uuidv4 } from "uuid";
 
 const mockTasks: ITask[] = [
   {
-    id: 1,
-    name: "mock 1",
+    id: "1",
+    name: "Mock task 1",
     isDone: false
   },
   {
-    id: 2,
-    name: "mock 2",
+    id: "2",
+    name: "Mock task 2",
     isDone: false
   }
 ];
@@ -30,22 +30,40 @@ function TasklistReducer(
   state = taskListStoreInitialState,
   action: ITaskListReducerActions
 ) {
+  let newState = {};
+
   switch (action.type) {
     case ADD_TASK:
-      console.log(action);
       const newTask: ITask = {
         id: uuidv4(),
         name: action.payload,
         isDone: false
       };
-      return {
-        ...state,
-        // taskList: state.taskList.concat(newTask)
-        taskList: state.taskList.concat(newTask)
-      };
+
+      state.taskList = state.taskList.concat(newTask);
+      newState = { ...state };
+      break;
+    case TOGGLE_TASK_STATUS:
+      const targetTaskId = action.payload;
+
+      state.taskList = state.taskList.map((task) => {
+        if (task.id === targetTaskId) {
+          return {
+            ...task,
+            isDone: !task.isDone
+          };
+        } else {
+          return task;
+        }
+      });
+
+      newState = { ...state };
+      break;
     default:
       throw new Error();
   }
+
+  return newState;
 }
 
 export default TasklistReducer;
