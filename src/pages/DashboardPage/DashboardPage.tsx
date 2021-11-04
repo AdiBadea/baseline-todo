@@ -1,5 +1,4 @@
-import React from "react";
-
+/** Sections */
 import NewTaskSection from "./NewTaskSection/NewTaskSection";
 import TaskListSection from "./TaskListSection/TaskListSection";
 
