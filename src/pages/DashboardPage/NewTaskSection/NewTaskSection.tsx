@@ -1,8 +1,7 @@
 /** Core */
-import React, { useState } from "react";
+import { useState, SyntheticBaseEvent } from "react";
 /** MUI */
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import IconButton from "@mui/material/IconButton";
@@ -24,7 +23,7 @@ function NewTaskSection() {
   });
   const { dispatch } = TaskListStore();
 
-  const handleTaskAdd = () => {
+  const handleTaskAdd = (): void => {
     if (newTaskName === NO_VARCHAR) {
       setInputError({
         ...inputError,
@@ -37,6 +36,18 @@ function NewTaskSection() {
     }
   };
 
+  const handleKeyPress = (event: SyntheticBaseEvent): void => {
+    const keyCodeForSubmit: number = 13;
+    /**
+     * The event.which property normalizes event.keyCode
+     * and event.charCode. It is recommended to watch
+     * event.which for keyboard key input.
+     */
+    if (event.which === keyCodeForSubmit) {
+      handleTaskAdd();
+    }
+  };
+
   return (
     <section className="new-task-section">
       <TextField
@@ -44,6 +55,7 @@ function NewTaskSection() {
         variant="standard"
         value={newTaskName}
         onChange={(event) => setNewTaskName(event.target.value)}
+        onKeyPress={handleKeyPress}
       />
       <IconButton
         className="new-task-section-submit-button"
