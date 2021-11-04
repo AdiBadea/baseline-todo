@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import IconButton from "@mui/material/IconButton";
 /** Context */
 import { addTaskAction } from "../../../context/Actions";
 import TaskListStore from "../../../context/TaskListStore";
@@ -39,16 +41,18 @@ function NewTaskSection() {
     <section className="new-task-section">
       <TextField
         label="Task name"
+        variant="standard"
         value={newTaskName}
         onChange={(event) => setNewTaskName(event.target.value)}
       />
-      <Button
+      <IconButton
         className="new-task-section-submit-button"
-        variant="contained"
+        color="primary"
+        size="large"
         onClick={handleTaskAdd}
       >
-        Add
-      </Button>
+        <AddTaskIcon fontSize="large" />
+      </IconButton>
       <Snackbar
         open={inputError.isDisplayed}
         anchorOrigin={inputError.location}
