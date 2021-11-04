@@ -34,7 +34,11 @@ function TaskListItem({ name, isDone, taskId }: ITaskListItemProps) {
     <ListItem disablePadding onClick={() => handleTaskStatusToggle(taskId)}>
       <ListItemButton>
         <ListItemIcon>
-          {isDone ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+          {isDone ? (
+            <CheckBoxIcon />
+          ) : (
+            <CheckBoxOutlineBlankIcon color="primary" />
+          )}
         </ListItemIcon>
         <ListItemText primary={name} />
       </ListItemButton>
