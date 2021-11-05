@@ -1,5 +1,5 @@
 /** Context */
-import { ADD_TASK, TOGGLE_TASK_STATUS } from "./ActionTypes";
+import { ADD_TASK, TOGGLE_TASK_STATUS, REMOVE_TASK } from "./ActionTypes";
 /** Interfaces */
 import {
   ITask,
@@ -38,10 +38,10 @@ function TasklistReducer(
       newState = { ...state };
       break;
     case TOGGLE_TASK_STATUS:
-      const targetTaskId = action.payload;
+      const taskIdToUpdate = action.payload;
 
       state.taskList = state.taskList.map((task) => {
-        if (task.id === targetTaskId) {
+        if (task.id === taskIdToUpdate) {
           return {
             ...task,
             isDone: !task.isDone
@@ -53,6 +53,15 @@ function TasklistReducer(
 
       // Update the tasklist in localStorage also.
       localStorageWorker.updateTaskList(state.taskList);
+      newState = { ...state };
+      break;
+    case REMOVE_TASK:
+      const taskIdToDelete = action.payload;
+      const taskIndexToDelete = state.taskList.findIndex(
+        (task) => task.id === taskIdToDelete
+      );
+
+      state.taskList.splice(taskIndexToDelete, 1);
       newState = { ...state };
       break;
     default:

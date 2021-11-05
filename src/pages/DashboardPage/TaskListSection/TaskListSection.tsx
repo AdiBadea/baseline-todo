@@ -1,5 +1,5 @@
 /** Core */
-import React, { ReactElement } from "react";
+// import {  } from "react";
 /** MUI */
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -8,10 +8,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import IconButton from "@mui/material/IconButton";
 import Divider from "@mui/material/Divider";
+import CloseIcon from "@mui/icons-material/Close";
 /** Context */
 import TaskListStore from "../../../context/TaskListStore";
-import { toggleTaskStatusAction } from "../../../context/Actions";
+import {
+  toggleTaskStatusAction,
+  removeTaskAction
+} from "../../../context/Actions";
 /** Interfaces */
 import { ITask } from "../../../common/commonInterfaces";
 /** Constants */
@@ -23,6 +28,24 @@ interface ITaskListItemProps {
   taskId: string;
 }
 
+interface IRemoveTaskButtonProps {
+  taskId: string;
+}
+
+function RemoveTaskButton({ taskId }: IRemoveTaskButtonProps) {
+  const { dispatch } = TaskListStore();
+
+  const handleTaskRemoval = (taskId: string) => {
+    dispatch(removeTaskAction(taskId));
+  };
+
+  return (
+    <IconButton edge="end" onClick={() => handleTaskRemoval(taskId)}>
+      <CloseIcon />
+    </IconButton>
+  );
+}
+
 function TaskListItem({ name, isDone, taskId }: ITaskListItemProps) {
   const { dispatch } = TaskListStore();
 
@@ -31,7 +54,11 @@ function TaskListItem({ name, isDone, taskId }: ITaskListItemProps) {
   };
 
   return (
-    <ListItem disablePadding onClick={() => handleTaskStatusToggle(taskId)}>
+    <ListItem
+      disablePadding
+      onClick={() => handleTaskStatusToggle(taskId)}
+      secondaryAction={<RemoveTaskButton taskId={taskId} />}
+    >
       <ListItemButton>
         <ListItemIcon>
           {isDone ? (
@@ -54,20 +81,18 @@ function TaskListSection() {
     // TODO - Simplify this
     switch (taskType) {
       case TASK_TYPES.PENDING_TASKS:
-        return taskList.map(
-          (task: ITask): ReactElement => {
-            if (!task.isDone) {
-              return (
-                <TaskListItem
-                  name={task.name}
-                  isDone={task.isDone}
-                  key={task.id}
-                  taskId={task.id}
-                />
-              );
-            }
+        return taskList.map((task: ITask) => {
+          if (!task.isDone) {
+            return (
+              <TaskListItem
+                name={task.name}
+                isDone={task.isDone}
+                key={task.id}
+                taskId={task.id}
+              />
+            );
           }
-        );
+        });
       case TASK_TYPES.COMPLETED_TASKS:
         return taskList.map(
           (task: ITask): ReactElement => {
